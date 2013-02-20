@@ -6,17 +6,9 @@
 
 <script>
 
-// $.ajax({url:'http://intern.coll.mpg.de/biblio/GITHUB/aleph-rss/rss.php?myquery=wab=new-acq&mybase=rdg01&output=json',
-// dataType: 'json', 
-// success: function(data) { 
-// $('body').html("<p>item1="+data.channel.item[1].title);
-// }
-// });
+	$('body').append('<p id="fetching">fetching rdg01 feed...</p>');
 
-
-		 $('body').append('<p id="fetching">fetching results...</p>');
-
-$.ajax({url:'http://intern.coll.mpg.de/biblio/GITHUB/aleph-rss/rss.php?myquery=wab=new-acq&mybase=rdg01&output=json',
+$.ajax({url:'http://www.coll.mpg.de/bib/beta/temp/rss.php?myquery=wab=new-acq&mybase=rdg01&output=json',
 dataType: 'jsonp', 
 success: function(data) { 
 
