@@ -1,0 +1,41 @@
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+
+<script>
+
+// $.ajax({url:'http://intern.coll.mpg.de/biblio/GITHUB/aleph-rss/rss.php?myquery=wab=new-acq&mybase=rdg01&output=json',
+// dataType: 'json', 
+// success: function(data) { 
+// $('body').html("<p>item1="+data.channel.item[1].title);
+// }
+// });
+
+
+		 $('body').append('<p id="fetching">fetching results...</p>');
+
+$.ajax({url:'http://intern.coll.mpg.de/biblio/GITHUB/aleph-rss/rss.php?myquery=wab=new-acq&mybase=rdg01&output=json',
+dataType: 'jsonp', 
+success: function(data) { 
+
+						$('#fetching').remove();
+
+						var itemData = data.channel.item;
+
+						for(var i =0;i < itemData.length-1;i++)
+								{
+										var item = itemData[i];
+										console.log(item.title);
+										$('body').append('<p>'+item.title+'</p>');
+								}
+						
+				}
+		});
+
+
+</script>
+</body>
+
+</html>
