@@ -1,0 +1,48 @@
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+
+<script>
+
+	$('body').append('<p id="fetching">fetching from rdg01...</p>');
+
+$.ajax({url:'http://www.coll.mpg.de/bib/beta/temp/rss.php?myquery=wrd=lessig&mybase=rdg01&output=json',
+
+dataType: 'jsonp', 
+success: function(data) { 
+
+						$('#fetching').remove();
+
+						var itemData = data.channel.item;
+
+						for(var i =0;i < itemData.length-1;i++)
+								{
+										if (typeof itemData[i].guid == 'string') {
+												var isbn = itemData[i].guid;} else { var isbn = undefined; }
+										
+										if (isbn) {
+										$.ajax({url: 'http://books.google.com/books?bibkeys=ISBN:'+isbn+'&jscmd=viewapi',
+												dataType: 'jsonp',
+												success: function(booksInfo) {
+												for (id in booksInfo) {
+														isbn = id;
+														console.log(booksInfo[id].thumbnail_url);
+
+														$('body').append('<p><img src="'+booksInfo[id].thumbnail_url+'"/></p>');
+												}
+														}
+												});
+										}
+								}
+
+					
+				}
+		});
+
+
+</script>
+</body>
+
+</html>
