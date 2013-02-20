@@ -8,7 +8,8 @@
 
 	$('body').append('<p id="fetching">fetching rdg01 feed...</p>');
 
-$.ajax({url:'http://www.coll.mpg.de/bib/beta/temp/rss.php?myquery=wab=new-acq&mybase=rdg01&output=json',
+//$.ajax({url:'http://www.coll.mpg.de/bib/beta/temp/rss.php?myquery=wab=new-acq&mybase=rdg01&output=json',
+$.ajax({url:'http://www.coll.mpg.de/bib/GITHUB/aleph-rss/rss.php?myquery=wab=new-acq&mybase=rdg01&output=json',
 dataType: 'jsonp', 
 success: function(data) { 
 
