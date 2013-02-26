@@ -22,7 +22,7 @@ success: function(data) {
 						var itemData = data.channel.item;
 
 						//	for(var i =0;i < itemData.length-1;i++) // alle Titel ausgeben (max. 100)
-						for(var i =0;i < 5;i++) // nur die aktuellsten 5 Titel ausgeben
+						for(var i =0;i < itemData.length && i < 5;i++) // nur die aktuellsten 5 Titel ausgeben
 								{
 										if (typeof itemData[i].guid == 'string') {
 												var isbn = itemData[i].guid;} else { var isbn = undefined; }
