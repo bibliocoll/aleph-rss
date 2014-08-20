@@ -7,7 +7,7 @@ header ("Content-Type:text/xml");
 }
 // based on: http://www.exlibrisgroup.org/display/AlephCC/Aleph+RSS+feeds+%28PHP+script%29
 // Original code by Thomas McNulty 2010, Virginia Commonwealth University
-// f. Aleph/MPG Daniel Zimmel 2011-2013
+// f. Aleph/MPG Daniel Zimmel 2011-2014
 // License: BSD style
 // Short description: Use, modification and distribution of the code are permitted provided 
 // the copyright notice, list of conditions and disclaimer appear in all related material.
@@ -201,9 +201,12 @@ foreach ($arr_feeds as $feed) {
 		$notation_result = $record->xpath("metadata/oai_marc/varfield[@id='700']/subfield[@label='a']");
 		// zeige bis zu 3 Notationen an:
 		$notation = (empty($notation_result[0]) ? '' :  $notation_result[0]).(empty($notation_result[1]) ? '' : ", ". $notation_result[1]).(empty($notation_result[2]) ? '' : ", ".$notation_result[2]);
+        // Inhaltsbeschreibungen abgreifen:
+        $abstract = $record->xpath("metadata/oai_marc/varfield[@id='750']/subfield[@label='a']");
 		// Hier wird die Description konstruiert:
-  	$description = (empty($publisher[0]) ? '' : $publisher[0]." ").(empty($year[0]) ? '' : $year[0].". ").(empty($callnumber_result[0]) ? '' : " Signatur:&nbsp;".(string)$callnumber_result[0]);
+        $description = (empty($publisher[0]) ? '' : $publisher[0]." ").(empty($year[0]) ? '' : $year[0].". ").(empty($callnumber_result[0]) ? '' : " Signatur:&nbsp;".(string)$callnumber_result[0]);
 		$description .= (empty($notation) ? '' : ". Notation: ". $notation.".");
+        $description .= (empty($description[0]) ? '' : "- Abstract: ". $abstract[0]);
 		// bei folgenden Queries muss [1] selektiert werden, da in
 		// Aleph-Ausgabe immer das erste Feld fuer die erste Hierarchie
 		// steht (sonst default: letztes gefundenes Feld = kann auch
